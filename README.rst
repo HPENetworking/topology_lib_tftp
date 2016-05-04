@@ -9,7 +9,7 @@ Workstations
 Documentation
 =============
 
-    https://github.hpe.com/matthew-hall/topology_lib_tftp/tree/master/doc
+    https://github.com/HPENetworking/topology_lib_tftp/tree/master/doc
 
 
 License

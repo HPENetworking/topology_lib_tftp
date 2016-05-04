@@ -74,8 +74,8 @@ setup(
         'on Linux Workstations'
     ),
     long_description=read('README.rst'),
-    url=('https://github.hpe.com/matthew-hall/'
-         'topology_lib_tftp/tree/master/doc'),
+    url=('https://github.com/HPENetworking/topology_lib_tftp'
+         '/tree/master/doc'),
     keywords='topology_lib_tftp',
 
     classifiers=[
