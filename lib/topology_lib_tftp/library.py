@@ -34,7 +34,7 @@ def start_server(enode, path):
 
     path = path.replace('/', '\/')
 
-    if(enode('[ -f /etc/xinetd.d/tftp ] && echo "Y"', shell='bash') == 'Y'):
+    if(enode('[ -f /etc/xinetd.d/tftp ] && echo "Y"') == 'Y'):
         cfg_file = "/etc/xinetd.d/tftp"
         enode("sed -i '/disable/ s/yes/no/' {}".format(cfg_file))
         enode("sed -i '/server_args/ s/=.*/= -s {}/' {}".format(path,
@@ -55,7 +55,7 @@ def stop_server(enode):
     Stop the TFTP server.
     """
 
-    if(enode('[ -f /etc/xinetd.d/tftp ] && echo "Y"', shell='bash') == 'Y'):
+    if(enode('[ -f /etc/xinetd.d/tftp ] && echo "Y"') == 'Y'):
         enode("service xinetd stop")
     elif(enode('[ -f /etc/default/tftpd-hpa ] && echo "Y"') == 'Y'):
         enode("service tftpd-hpa stop")
