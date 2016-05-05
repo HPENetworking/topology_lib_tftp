@@ -30,6 +30,8 @@ def start_server(enode, path):
         by tftpd-hpa config file and uses the first service found.
 
     :param str path: sets the root folder for the tftp server
+    :rtype: bool
+    :return: true if the service started
     """
 
     path = path.replace('/', '\/')
@@ -39,15 +41,17 @@ def start_server(enode, path):
         enode("sed -i '/disable/ s/yes/no/' {}".format(cfg_file))
         enode("sed -i '/server_args/ s/=.*/= -s {}/' {}".format(path,
               cfg_file))
-        enode("service xinetd restart")
+        result = enode("service xinetd restart")
     elif(enode('[ -f /etc/default/tftpd-hpa ] && echo "Y"') == 'Y'):
         cfg_file = "/etc/default/tftpd-hpa"
         enode("sed -i '/DIRECTORY/ s/=.*/=\"{}\"/' {}".format(path, cfg_file))
-        enode("service tftpd-hpa restart")
+        result = enode("service tftpd-hpa restart")
     else:
         raise Exception(
             "Cannot find supported tftp service (no config file found)."
         )
+
+    return('failed' not in result)
 
 
 def stop_server(enode):
